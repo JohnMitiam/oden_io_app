@@ -5,8 +5,8 @@ interface BaseInputProps {
     hasError: boolean;
 }
 
-const BaseInput = tw.input<BaseInputProps>
-    `border rounded-md p-2 w-full border-gray-300 text-black
+const BaseInput = tw.textarea<BaseInputProps>
+    `border rounded-md p-2 w-full border-gray-300
     ${(props) =>
         !props.hasError &&
         !props.value &&
@@ -27,48 +27,49 @@ const BaseInput = tw.input<BaseInputProps>
 
 type Props = {
   label?: string;
-  placeholder?: string;
-  dataType?: "text" | "number";
+  dataType?: 'text' | 'number';
   readonly?: boolean;
   optional?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 } & FieldHookConfig<string>;
 
-export const FormikInput: React.FC<Props> = ({
+export const FormikTextArea: React.FC<Props> = ({
   label,
-  placeholder,
-  dataType = "text",
+  dataType = 'text',
   readonly,
-  optional = false,
   onChange,
+  optional = false,
   ...props
 }) => {
   const [field, meta] = useField(props);
 
-  return (
+    return (
     <div>
-      <div className="text-gray-800 text-sm font-medium py-1 text-left">
-        {label}
-        <span className="text-gray-400 pl-1">{optional && "(optional)"}</span>
-      </div>
-
-      <div>
-        <BaseInput
-          {...field}
-          placeholder={placeholder}
-          datatype={dataType}
-          readOnly={readonly}
-          type="text"
-          onChange={(e: any) => {
+        <div className="text-gray-800 text-sm font-medium py-1">
+          {label}
+          <span className='text-gray-400 pl-1'>
+            {optional && ("(optional)")}
+          </span>
+        </div>
+        <div>
+            <BaseInput
+                {...field}
+                datatype={dataType}
+                readOnly={readonly}
+                type='text'
+                onChange={(e: any) => {
             field.onChange(e);
             onChange && onChange(e);
           }}
           hasError={!!meta.error}
-        />
-        {meta.error ? (
-          <div className="text-red-500 text-sm text-left">{meta.error}</div>
+            />
+            {meta.error ? (
+          <div className="text-red-500 text-sm">
+            {meta.error}
+          </div>
         ) : null}
-      </div>
+        </div>   
+            
     </div>
-  );
-};
+    )
+}

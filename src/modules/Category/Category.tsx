@@ -4,8 +4,8 @@ import { BreadcrumbsContainer } from "../../core/components/Header";
 import { BreadCrumbs } from "../BreadCrumbs";
 import { useState } from "react";
 import { CreateButton } from "../../core/components/ActionButtons";
-import { Modal } from "../../core/components/Box";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Modal, PopupHeader } from "../../core/components/Box";
+import { RectangleStackIcon } from "@heroicons/react/24/outline";
 import { CreateCategory } from "./CreateCategory";
 
 export const Category = () => {
@@ -35,14 +35,10 @@ export const Category = () => {
                     {showCreate && (
                         <Modal show={true}>
                             <div className="p-4">
-                                <div className="flex justify-between py-2 px-4 border-b-2 border-gray-500">
-                                    <div className="text-sm text-black">Create Category</div>
-                                    <button
-                                    onClick={() => setShowCreate(false)}
-                                    className="text-black hover:text-red-500">
-                                        <XMarkIcon className="w-5" />
-                                    </button>
-                                </div>
+                                <PopupHeader onClose={() => setShowCreate(false)}>
+                                    <RectangleStackIcon className="w-5 text-gray-500" />
+                                    Create Category
+                                </PopupHeader>
                                 <CreateCategory loadData={async () => {
                                     handleRefresh();
                                 }}

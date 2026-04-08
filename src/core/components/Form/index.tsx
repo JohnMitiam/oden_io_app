@@ -2,3 +2,7 @@ export {FormikInput} from './FormikInput';
 export {FormikSubmit} from './FormikSubmit'
 export {CancelButton} from './CancelButton';
 export {FormsContainer} from './FormsContainer'
+export {AdditionalFormikInput} from './AdditionalFormikInput';
+export {FormikTextArea} from './FormikTextArea'
+export {FormsButtonContainer} from './FormsButtonContainer'
+export {FormikRichTextArea} from './FormikRichTextArea'

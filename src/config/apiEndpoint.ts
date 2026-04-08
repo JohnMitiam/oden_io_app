@@ -8,5 +8,7 @@ export const api = {
     BASE_URL: BASE_URL,
     AUTH_BASE_URL: AUTH_BASE_URL,
 
+    AFFILIATE_ENDPOINT: "/api/affiliate",
     CATEGORY_ENDPOINT: "/api/category",
+    PRODUCT_ENPOINT: "/api/products",
 }

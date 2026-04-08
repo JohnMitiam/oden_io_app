@@ -47,6 +47,9 @@ export const Header = () => {
                         <Link onClick={() => handleMenuClick("category")} to={`${routes.CATEGORY}`} className={`${activeMenuClass("category")}`}>
                             Category
                         </Link>
+                        <Link onClick={() => handleMenuClick("products")} to={`${routes.PRODUCTS}`} className={`${activeMenuClass("products")}`}>
+                            Products
+                        </Link>
                         <button className="cursor-pointer">
                             <ShoppingCartIcon className="text-white w-5 hover:text-primary-500" />
                         </button>
