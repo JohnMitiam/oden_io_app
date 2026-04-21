@@ -7,10 +7,10 @@ import {
   categoryValidationSchema,
 } from "../../models/Category";
 import { CategoryServices } from "../../services/Category";
-import { FormsContainer, FormikInput, CancelButton, FormikSubmit, AdditionalFormikInput, FormikTextArea, FormsButtonContainer } from "../../core/components/Form";
+import { FormsContainer, FormikInput, CancelButton, FormikSubmit, FormikTextArea, FormsButtonContainer } from "../../core/components/Form";
 import { useState } from "react";
 import { Modal, PopupHeader } from "../../core/components/Box";
-import { ShieldCheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { PhotoIcon, ShieldCheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { IconPicker } from "../../core/components/IconPicker";
 import React from "react";
 
@@ -83,12 +83,34 @@ export const CreateCategory: React.FC<Props> = ({ onClose, loadData }) => {
 
               <form method="POST" onSubmit={formikProps.handleSubmit}>
                 <FormsContainer>
-                  <AdditionalFormikInput
-                    name="icon"
-                    label="Icon"
-                    placeholder="Paste SVG code here (e.g., <svg...)"
-                    onClick={() => setShowHeroIcons(true)}
-                  />
+                  <div className="flex items-center gap-4">
+                  {formikProps.values.icon ? (
+                    <div 
+                        className="w-8 h-8 flex items-center justify-center rounded bg-gray-100 text-gray-600" 
+                        dangerouslySetInnerHTML={{ __html: formikProps.values.icon }} 
+                      />
+                  ) : (
+                    <PhotoIcon className="w-8 h-8 flex items-center justify-center rounded bg-gray-100 text-gray-600 p-2" />
+                  )}
+                  <div className="flex gap-1">
+                    <button
+                      type="button"
+                      onClick={() => setShowHeroIcons(true)}
+                      className="px-4 py-2 text-sm font-medium text-primary-700 bg-primary-50 hover:bg-primary-100 border border-primary-200 rounded-lg transition-colors cursor-pointer"
+                    >
+                      {formikProps.values.icon ? "Change Icon" : "Select Icon"}
+                    </button>
+                    {formikProps.values.icon && (
+                      <button 
+                        type="button"
+                        onClick={() => formikProps.setFieldValue("icon", "")}
+                        className="text-left text-xs text-red-500 hover:text-red-700 font-medium ml-1 transition-colors cursor-pointer"
+                      >
+                        Remove icon
+                      </button>
+                    )}
+                  </div>
+                  </div>
                   <FormikInput name="name" label="Name" />
                   <FormikTextArea name="description" label="Description" />
                 </FormsContainer>

@@ -21,6 +21,11 @@ const EditorWrapper = tw.div<EditorWrapperProps>`
   ${(props) => props.hasError 
     ? 'border-red-500 ring-1 ring-red-100' 
     : 'border-gray-300 focus-within:ring-2 focus-within:ring-primary-500 focus-within:border-primary-500'}
+
+  /* Add these lines to fix the list visibility */
+  [&_ul]:list-disc [&_ul]:ml-6 [&_ul]:my-2
+  [&_ol]:list-decimal [&_ol]:ml-6 [&_ol]:my-2
+  [&_li]:mb-1
 `;
 
 type Props = {

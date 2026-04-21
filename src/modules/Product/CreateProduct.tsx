@@ -38,9 +38,9 @@ export const CreateProduct = () => {
                                 <div className="col-span-4">
                                     <FormsContainer>
                                         <FormikInput name="name" label="Name" />
-                                        <FormikInput name="categoryId" label="Category" />
                                         <FormikInput name="price" label="Price" type="number" />
-                                        <FormikRichTextArea name="description" label="Description" />
+                                        <FormikRichTextArea
+                                        name="description" label="Description" />
                                     </FormsContainer>
                                 </div>
                                 <div className="col-span-1">

@@ -55,7 +55,6 @@ export const productValidationSchema = Yup.object({
     .trim("Product name should not have leading or trailing spaces"),
 
   description: Yup.string()
-    .max(100, "Description cannot exceed 100 characters")
     .nullable()
     .transform((value) => (value === "" ? null : value)), // Convert empty string to null
 });

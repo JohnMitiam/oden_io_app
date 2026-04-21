@@ -41,7 +41,7 @@ export const ProductList = () => {
                             price={Number(row.price)}
                             imageData={row.imageData}
                             name={row.name}
-                            description={row.description}
+                            // description={row.description}
                             onClick={() => alert(`Product Id Click! ${row.id}`)} />
                         ))
                     ) : (

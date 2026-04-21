@@ -6,7 +6,6 @@ interface Props {
     name: string;
     price: number;
     imageData?: string;
-    description: string;
     onClick: (paramId: number) => void;
 }
 
@@ -15,7 +14,6 @@ export const ProductCard: React.FC<Props> = ({
     name,
     price,
     imageData,
-    description,
     onClick
 }) => {
 
@@ -47,7 +45,7 @@ export const ProductCard: React.FC<Props> = ({
                 <div className="font-bold text-primary-500 text-base">${formattedPrice}</div>
                 <div>
                     <div className="font-semibold text-black text-sm whitespace-pre-wrap">{name}</div>
-                    <div className="font-base text-xs italic">{description}</div>
+                    {/* <div className="font-base text-xs italic">{description}</div> */}
                 </div>
             </div>
             </div>
