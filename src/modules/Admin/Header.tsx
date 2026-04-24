@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router"
-import { OdenLogo } from "../core/OdenLogo"
 import { useEffect, useState } from "react"
-import { routes } from "../config/routes";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { routes } from "../../config/routes";
+import { OdenLogo } from "../../core/OdenLogo";
 
 export const Header = () => {
     const [activeMenu, setActiveMenu] = useState(localStorage.getItem("activeMenu") || null);
@@ -34,13 +34,13 @@ export const Header = () => {
     "text-primary-500 text-sm border-b border-primary-500 pb-1 font-semibold px-3" :
     "text-white text-sm border-b border-black hover:border-primary-500 hover:text-primary-500 pb-1 font-semibold px-3";
 
-    return (    
+    return (
             <div className="px-24 py-3 bg-black shadow-md">
                 <div className="flex justify-between items-center">
-                        <Link to="/" >
-                            <OdenLogo height="" width="100%" />
-                        </Link>
-                    <div className="flex justify-end items-center gap-4">
+                    <Link to="/" >
+                        <OdenLogo height="" width="100%" />
+                    </Link>
+                    <div className="flex items-center gap-4">
                         <Link onClick={() => handleMenuClick("home")} to={`${routes.HOME}`} className={`${activeMenuClass("home")}`}>
                             Home
                         </Link>

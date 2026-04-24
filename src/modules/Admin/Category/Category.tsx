@@ -1,16 +1,18 @@
 import { Outlet, useLocation } from "react-router"
-import { routes } from "../../config/routes";
-import { BreadcrumbsContainer } from "../../core/components/Header";
-import { BreadCrumbs } from "../BreadCrumbs";
+
 import { useState } from "react";
-import { CreateButton } from "../../core/components/ActionButtons";
-import { Modal, PopupHeader } from "../../core/components/Box";
+
 import { RectangleStackIcon } from "@heroicons/react/24/outline";
 import { CreateCategory } from "./CreateCategory";
+import { BreadcrumbsContainer } from "../../../core/components/Header";
+import { BreadCrumbs } from "../../BreadCrumbs";
+import { CreateButton } from "../../../core/components/ActionButtons";
+import { routes } from "../../../config/routes";
+import { Modal, PopupHeader } from "../../../core/components/Box";
 
 export const Category = () => {
     const location = useLocation();
-      const [refreshTrigger, setRefreshTrigger] = useState(0);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
     const isOnPage = location.pathname === routes.CATEGORY;
 
     const breadCrumbs = isOnPage
@@ -19,7 +21,7 @@ export const Category = () => {
 
     const [showCreate, setShowCreate] = useState(false)
 
-      const handleRefresh = () => setRefreshTrigger((prev) => prev + 1);
+    const handleRefresh = () => setRefreshTrigger((prev) => prev + 1);
 
     return (
         <>

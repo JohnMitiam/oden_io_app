@@ -1,4 +1,4 @@
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import { OdenLogo } from "../../OdenLogo";
 
 interface Props {
@@ -7,6 +7,7 @@ interface Props {
     price: number;
     imageData?: string;
     onClick: (paramId: number) => void;
+    onDelete: (paramId: number) => void;
 }
 
 export const ProductCard: React.FC<Props> = ({
@@ -14,7 +15,8 @@ export const ProductCard: React.FC<Props> = ({
     name,
     price,
     imageData,
-    onClick
+    onClick,
+    onDelete
 }) => {
 
     const formattedPrice = new Intl.NumberFormat('en-US', {
@@ -52,8 +54,8 @@ export const ProductCard: React.FC<Props> = ({
 
             <div className="flex">
                 <button onClick={() => onClick(id)} className="w-full rounded-bl-xl py-2 font-semibold text-xs bg-primary-500 text-white cursor-pointer hover:bg-primary-600">View</button>
-                <button className="w-full rounded-br-xl py-2 font-semibold text-xs bg-yellow-500 text-black flex items-center justify-center space-x-1 cursor-pointer">
-                    <ShoppingCartIcon className="w-4" /><span>Add to Cart</span>
+                <button onClick={() => onDelete(id)} className="w-full rounded-br-xl py-2 font-semibold text-xs bg-red-500 text-black flex items-center justify-center space-x-1 cursor-pointer">
+                    <TrashIcon className="w-4" /><span>Delete</span>
                 </button>
             </div>
         </div>

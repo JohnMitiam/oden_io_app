@@ -2,17 +2,14 @@ import { Formik } from "formik";
 import * as OutlineIcons from '@heroicons/react/24/outline';
 import * as SolidIcons from '@heroicons/react/24/solid';
 
-import {
-  categoryDefaultValue,
-  categoryValidationSchema,
-} from "../../models/Category";
-import { CategoryServices } from "../../services/Category";
-import { FormsContainer, FormikInput, CancelButton, FormikSubmit, FormikTextArea, FormsButtonContainer } from "../../core/components/Form";
 import { useState } from "react";
-import { Modal, PopupHeader } from "../../core/components/Box";
 import { PhotoIcon, ShieldCheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { IconPicker } from "../../core/components/IconPicker";
 import React from "react";
+import { Modal, PopupHeader } from "../../../core/components/Box";
+import { FormsContainer, FormikInput, FormikTextArea, FormsButtonContainer, CancelButton, FormikSubmit } from "../../../core/components/Form";
+import { IconPicker } from "../../../core/components/IconPicker";
+import { categoryDefaultValue, categoryValidationSchema } from "../../../models/Category";
+import { CategoryServices } from "../../../services/Category";
 
 interface Props {
   onClose?: () => void;
