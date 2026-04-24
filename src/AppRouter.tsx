@@ -1,11 +1,16 @@
 import { createHashRouter } from "react-router";
 import App from "./App";
-import { Category, CategoryList } from "./modules/Category";
-import { LandingPage } from "./modules/LandingPage";
-import { Product } from "./modules/Product/Product";
-import { ProductList } from "./modules/Product/ProductList";
-import { CreateProduct } from "./modules/Product";
-import { DetailsProduct } from "./modules/Product/DetailsProduct";
+import {
+    Category,
+    CategoryList
+} from "./modules/Admin/Category";
+import { LandingPage } from "./modules/Admin/LandingPage";
+import {
+    Product,
+    ProductList,
+    CreateProduct,
+    DetailsProduct
+} from "./modules/Admin/Product";
 
 export const AppRouter = createHashRouter([
     {

@@ -1,9 +1,9 @@
 import { Formik } from "formik";
-import { productDefaultValue, productValidationSchema } from "../../models/Product";
-import { ProductServices } from "../../services/Products";
-import { CancelButton, FormikInput, FormikRichTextArea, FormikSubmit, FormsButtonContainer, FormsContainer } from "../../core/components/Form";
-import { routes } from "../../config/routes";
 import { useNavigate } from "react-router";
+import { routes } from "../../../config/routes";
+import { FormsContainer, FormikInput, FormikRichTextArea, FormsButtonContainer, CancelButton, FormikSubmit } from "../../../core/components/Form";
+import { productDefaultValue, productValidationSchema } from "../../../models/Product";
+import { ProductServices } from "../../../services/Products";
 
 export const CreateProduct = () => {
     const navigate = useNavigate();

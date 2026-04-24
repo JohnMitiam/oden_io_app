@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react"
-import { categoryTableDefaultValue, type CategoryTableResultViewModel } from "../../models/Category"
-import { CategoryServices } from "../../services/Category";
-import { ListContainer } from "../../core/components/List";
-import { CategoryCard } from "../../core/components/Card";
-import { useOutletContext } from "react-router";
-import { Paginations } from "../../core/components/Paginations";
 import { TrashIcon } from "@heroicons/react/24/outline";
-import { Modal, PopupHeader } from "../../core/components/Box";
-import { CancelButton } from "../../core/components/Form";
-import { DeleteButton } from "../../core/components/ActionButtons";
+import { useEffect, useState } from "react"
+import { useOutletContext } from "react-router";
+import { DeleteButton } from "../../../core/components/ActionButtons";
+import { Modal, PopupHeader } from "../../../core/components/Box";
+import { CategoryCard } from "../../../core/components/Card";
+import { CancelButton } from "../../../core/components/Form";
+import { ListContainer } from "../../../core/components/List";
+import { Paginations } from "../../../core/components/Paginations";
+import { type CategoryTableResultViewModel, categoryTableDefaultValue } from "../../../models/Category";
+import { CategoryServices } from "../../../services/Category";
+
 
 export const CategoryList = () => {
     const [categories, setCategories] = useState<CategoryTableResultViewModel>(categoryTableDefaultValue);
@@ -94,7 +95,7 @@ export const CategoryList = () => {
 
                 <div>
                   <div className="pb-2">
-                    This action will permanently remove this Category
+                    This action will permanently remove "{categories.data.find((item) => item.id === selectedId)?.name || "this Category."}"
                   </div>
                   are you sure you want to proceed?
                 </div>

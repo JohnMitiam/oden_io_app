@@ -1,8 +1,8 @@
 import { Outlet, useLocation, useNavigate } from "react-router"
-import { routes } from "../../config/routes";
-import { BreadcrumbsContainer } from "../../core/components/Header";
-import { BreadCrumbs } from "../BreadCrumbs";
-import { CreateButton } from "../../core/components/ActionButtons";
+import { routes } from "../../../config/routes";
+import { BreadcrumbsContainer } from "../../../core/components/Header";
+import { BreadCrumbs } from "../../BreadCrumbs";
+import { CreateButton } from "../../../core/components/ActionButtons";
 
 export const Product = () => {
     const location = useLocation();
@@ -28,7 +28,7 @@ export const Product = () => {
                         </CreateButton>
                     )}
                 </BreadcrumbsContainer>
-                <Outlet />
+                <Outlet/>
             </div>
         </>
     )
