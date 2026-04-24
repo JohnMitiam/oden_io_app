@@ -41,7 +41,7 @@ export const Header = () => {
                         <OdenLogo height="" width="100%" />
                     </Link>
                     <div className="flex items-center gap-4">
-                        <Link onClick={() => handleMenuClick("home")} to={`${routes.HOME}`} className={`${activeMenuClass("home")}`}>
+                        <Link onClick={() => handleMenuClick("dashboard")} to={`${routes.DASHBOARD}`} className={`${activeMenuClass("dashboard")}`}>
                             Home
                         </Link>
                         <Link onClick={() => handleMenuClick("category")} to={`${routes.CATEGORY}`} className={`${activeMenuClass("category")}`}>

@@ -1,6 +1,6 @@
 interface Props {
-    height: string;
-    width: string;
+    height?: string;
+    width?: string;
 }
 
 export const OdenLogo: React.FC<Props> = ({height, width}) => {
