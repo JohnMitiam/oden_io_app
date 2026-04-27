@@ -9,11 +9,13 @@ import { BreadCrumbs } from "../../BreadCrumbs";
 import { CreateButton } from "../../../core/components/ActionButtons";
 import { routes } from "../../../config/routes";
 import { Modal, PopupHeader } from "../../../core/components/Box";
+import { useAuth } from "../../../contexts/AuthContext";
 
 export const Category = () => {
     const location = useLocation();
     const [refreshTrigger, setRefreshTrigger] = useState(0);
     const isOnPage = location.pathname === routes.CATEGORY;
+    const {user} = useAuth();
 
     const breadCrumbs = isOnPage
     ? [{ link: "Categories", to: ""}]
@@ -30,10 +32,11 @@ export const Category = () => {
                     <div className="flex">
                         <BreadCrumbs links={breadCrumbs} />
                     </div>
-                    <CreateButton onClick={() => setShowCreate(true)}>
-                        Create Category
-                    </CreateButton>
-
+                    {user && (
+                        <CreateButton onClick={() => setShowCreate(true)}>
+                            Create Category
+                        </CreateButton>
+                    )}
                     {showCreate && (
                         <Modal show={true}>
                             <div className="p-4">

@@ -12,9 +12,12 @@ export const Header = () => {
     const setActiveMenuRoute = (route: any) => {
         if (route === routes.HOME) {
             setActiveMenu("home");
+        } else if (route === routes.DASHBOARD) {
+            setActiveMenu("dashboard")
         } else if (route === routes.CATEGORY) {
             setActiveMenu("category")
-        } else {
+        } else if (route === routes.PRODUCTS) {
+            setActiveMenu("products")
         }
     }
 

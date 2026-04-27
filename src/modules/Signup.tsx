@@ -7,7 +7,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { routes } from "../config/routes";
 import {
   InputEmail,
@@ -24,12 +24,15 @@ interface Props {
 
 export const Signup: React.FC<Props> = ({ switchMode }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [isAuth, setIsAuth] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const from = location.state?.from?.pathname || routes.HOME;
 
   const continueWithGoogle = async () => {
     setIsAuth(true);
@@ -38,7 +41,7 @@ export const Signup: React.FC<Props> = ({ switchMode }) => {
       const isNewUser = getAdditionalUserInfo(result)?.isNewUser;
 
       console.log(result.user.uid, "New user?", isNewUser);
-      navigate(routes.HOME);
+      navigate(from, { replace: true });
     } catch (error: any) {
       console.log(error);
       setError(error.message);
@@ -62,7 +65,7 @@ export const Signup: React.FC<Props> = ({ switchMode }) => {
       });
 
       console.log(response.user.uid, "Name saved!", response.user.displayName);
-      navigate(routes.HOME);
+      navigate(from, { replace: true });
     } catch (error: any) {
       console.log(error);
       setError(error.message);

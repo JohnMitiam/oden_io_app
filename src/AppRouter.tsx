@@ -12,10 +12,10 @@ import {
     DetailsProduct
 } from "./modules/Admin/Product";
 import { useAuth } from "./contexts/AuthContext";
-import { LandingPage } from "./modules/Main/LandingPage";
 import { AdminRoute } from "./AdminRoute";
 import { Login } from "./modules/Login";
 import { Signup } from "./modules/Signup";
+import { LandingPage } from "./modules/Main/LandingPage";
 
 interface AppRouterProps {
     children?: React.ReactNode;
@@ -41,10 +41,18 @@ export const AppRouter = createHashRouter([
             // Guest Routes
             {
                 index: true,
-                element: (
-                    <LandingPage />
-                )
+                element: <LandingPage />
             },
+            {
+                        path: "category",
+                        element: <Category />,
+                        children: [
+                            {
+                                index: true,
+                                element: <CategoryList />
+                            }
+                        ]
+                    },
             {
                 path: "login",
                 element:

@@ -10,7 +10,7 @@ import { ListContainer } from "../../../core/components/List";
 import { Paginations } from "../../../core/components/Paginations";
 
 export const ProductList = () => {
-    const [data, setdata] = useState<ProductTableResultViewModel>(productTableDefaultValue);
+    const [data, setData] = useState<ProductTableResultViewModel>(productTableDefaultValue);
     const [selectedId, setSelectedId] = useState<number>(0);
     const [showDelete, setShowDelete] = useState(false);
 
@@ -18,9 +18,9 @@ export const ProductList = () => {
     const pageSize = 30;
 
     const loadData = async () => {
-        ProductServices.getList(page, pageSize)
+        ProductServices.getMyProducts(page, pageSize)
         .then((res) => {
-            setdata(res);
+            setData(res);
             console.log("data: ", res.data);
         })
         .catch((error: any) => {
@@ -48,19 +48,14 @@ export const ProductList = () => {
         }
     }
 
-    // const handleDelete = (rowId: number) => {
-    //     setSelectedId(rowId);
-    //     setShowDelete(true)
-    // }
-
     return (
         <>
             <ListContainer>
                 <div className="grid grid-cols-6 gap-5">
                     {data.data.length > 0 ? (
-                        data.data.map((row) => (
-                            <ProductCard
-                            id={Number(row.id)}
+                        data.data.map((row, index) => (
+                        <ProductCard
+                            key={row.id || index}
                             price={Number(row.price)}
                             imageData={row.imageData}
                             name={row.name}

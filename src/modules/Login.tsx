@@ -1,7 +1,7 @@
 import { auth } from "../firebase/firebase"
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { useState } from 'react';
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { routes } from "../config/routes";
 import {
   InputEmail,
@@ -17,11 +17,19 @@ interface Props {
 
 export const Login: React.FC<Props> = ({ switchMode }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [isAuth, setIsAuth] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const isEmailValid = email.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const isPasswordValid = password.length >= 6;
+
+  const isButtonDisabled = isAuth || !isEmailValid || !isPasswordValid;
+
+  const from = location.state?.from?.pathname || routes.HOME;
 
   const continueWithGoogle = async () => {
     setIsAuth(true);
@@ -29,7 +37,7 @@ export const Login: React.FC<Props> = ({ switchMode }) => {
     signInWithPopup(auth, new GoogleAuthProvider())
       .then((response) => {
         console.log(response.user.uid);
-        navigate(`${routes.HOME}`);
+        navigate(from, { replace: true });
       })
       .catch((error: any) => {
         console.log(error);
@@ -47,7 +55,7 @@ export const Login: React.FC<Props> = ({ switchMode }) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((response) => {
         console.log(response.user.uid);
-        navigate(`${routes.HOME}`);
+        navigate(from, { replace: true });
       })
       .catch((error: any) => {
         console.log(error);
@@ -87,7 +95,7 @@ export const Login: React.FC<Props> = ({ switchMode }) => {
           </div>
 
           <div className="space-y-2">
-            <SignInButton onClick={() => signInWithEmail()} disabled={isAuth}>
+            <SignInButton onClick={() => signInWithEmail()} disabled={isButtonDisabled}>
               Login
             </SignInButton>
             <div className="w-full flex items-center justify-center relative py-4">

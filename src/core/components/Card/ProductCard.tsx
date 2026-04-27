@@ -2,16 +2,14 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { OdenLogo } from "../../OdenLogo";
 
 interface Props {
-    id: number;
     name: string;
     price: number;
     imageData?: string;
-    onClick: (paramId: number) => void;
-    onDelete: (paramId: number) => void;
+    onClick: () => void;
+    onDelete: () => void;
 }
 
 export const ProductCard: React.FC<Props> = ({
-    id,
     name,
     price,
     imageData,
@@ -23,8 +21,6 @@ export const ProductCard: React.FC<Props> = ({
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
     }).format(price);
-
-    // const colorClass = colors[id % colors.length];
 
     return (
         <div className="transition-all duration-300 ease-in-out transform hover:-translate-y-1">
@@ -53,8 +49,8 @@ export const ProductCard: React.FC<Props> = ({
             </div>
 
             <div className="flex">
-                <button onClick={() => onClick(id)} className="w-full rounded-bl-xl py-2 font-semibold text-xs bg-primary-500 text-white cursor-pointer hover:bg-primary-600">View</button>
-                <button onClick={() => onDelete(id)} className="w-full rounded-br-xl py-2 font-semibold text-xs bg-red-500 text-black flex items-center justify-center space-x-1 cursor-pointer">
+                <button onClick={() => onClick()} className="w-full rounded-bl-xl py-2 font-semibold text-xs bg-primary-500 text-white cursor-pointer hover:bg-primary-600">View</button>
+                <button onClick={() => onDelete()} className="w-full rounded-br-xl py-2 font-semibold text-xs bg-red-500 text-black flex items-center justify-center space-x-1 cursor-pointer">
                     <TrashIcon className="w-4" /><span>Delete</span>
                 </button>
             </div>

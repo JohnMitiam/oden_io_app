@@ -12,18 +12,25 @@ interface Props {
 }
 
 export const Layout: React.FC<Props> = ({ children }) => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
 
-    const isAdminView = location.pathname.startsWith('/dashboard');
+    if (loading) {
+        return <div className="flex h-screen items-center justify-center">Loading...</div>; 
+    }
+
+    const isAdminView = location.pathname.startsWith('/dashboard') || 
+                        location.pathname.startsWith('/products') || 
+                        location.pathname.startsWith('/category');
+
     const isSellerCentre = location.pathname === '/';
 
     const handleLogout = async () => {
         try {
             await signOut(auth);
-            navigate("/"); 
+            navigate("/", { replace: true });
         } catch (error) {
             console.error("Error signing out: ", error);
         }
@@ -46,7 +53,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                             </Link>
                         )
                     ) : (
-                        <Link to="/" className="hover:underline">
+                        <Link to="/login" state={{ from: "/dashboard" }} className="hover:underline">
                             Visit Storefront
                         </Link>
                     )}
@@ -87,7 +94,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             <div className="space-y-4">
                 {user && !isSellerCentre && <Header />}
                 
-                <div className={user ? "px-24" : ""}>
+                <div className="px-24">
                     {children}
                 </div>
             </div>

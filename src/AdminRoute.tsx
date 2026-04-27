@@ -12,7 +12,7 @@ export const AdminRoute: React.FC<Props> = ({ children }) => {
   if (loading) return <>Loading...</>;
   
   if (!user) {
-    return <Navigate to="/auth" replace />;
+    return <Navigate to="/" state={{ from: location.pathname }} />;
   }
 
   return <>{children}</>;
