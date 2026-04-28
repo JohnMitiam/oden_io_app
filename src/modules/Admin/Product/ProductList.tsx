@@ -8,6 +8,7 @@ import { ProductCard } from "../../../core/components/Card";
 import { CancelButton } from "../../../core/components/Form";
 import { ListContainer } from "../../../core/components/List";
 import { Paginations } from "../../../core/components/Paginations";
+import { ModalButtonsContainer } from "../../../core/components/Box/ModalButtonsContainer";
 
 export const ProductList = () => {
     const [data, setData] = useState<ProductTableResultViewModel>(productTableDefaultValue);
@@ -66,7 +67,9 @@ export const ProductList = () => {
                             }} />
                         ))
                     ) : (
-                        <div className="col-span-full py-10 text-center text-gray-400 italic bg-gray-50/50 rounded-lg border-2 border-dashed border-gray-100"> No Products found. </div>
+                        <div
+                            className="col-span-full py-10 text-center text-gray-400 italic bg-gray-50/50 rounded-lg border-2 border-dashed border-gray-100"> No Products found.
+                        </div>
                     )}
                 </div>
             </ListContainer>
@@ -74,7 +77,8 @@ export const ProductList = () => {
             <Paginations
                 dataSource={data}
                 onPrevious={() => setPage((prev) => Math.max(prev - 1, 1))}
-                onNext={() => setPage((prev) => prev < (data.totalPages || 1) ? prev + 1 : prev)} />
+                onNext={() => setPage((prev) => prev < (data.totalPages || 1) ? prev + 1 : prev)}
+            />
 
             {showDelete && (
                 <Modal show={true}>
@@ -91,14 +95,14 @@ export const ProductList = () => {
                             are you sure you want to proceed?
                         </div>
 
-                        <div className="flex justify-end space-x-3">
+                        <ModalButtonsContainer>
                             <CancelButton onClick={() => setShowDelete(false)}>
                                 Cancel
                              </CancelButton>
                             <DeleteButton onClick={() => deleteRecord(selectedId)}>
                                 Delete
                             </DeleteButton>
-                        </div>
+                        </ModalButtonsContainer>
                     </div>
                 </Modal>
             )}

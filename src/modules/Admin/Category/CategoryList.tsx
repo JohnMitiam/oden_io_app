@@ -9,6 +9,7 @@ import { ListContainer } from "../../../core/components/List";
 import { Paginations } from "../../../core/components/Paginations";
 import { type CategoryTableResultViewModel, categoryTableDefaultValue } from "../../../models/Category";
 import { CategoryServices } from "../../../services/Category";
+import { ModalButtonsContainer } from "../../../core/components/Box/ModalButtonsContainer";
 
 
 export const CategoryList = () => {
@@ -64,16 +65,16 @@ export const CategoryList = () => {
                     {categories.data.length > 0 ? (
                         categories.data.map((row) => (
                         <CategoryCard
-                        id={Number(row.id)}
-                        icon={row.icon}
-                        name={row.name}
-                        description={row.description}
-                        onDelete={() => handleDelete(Number(row.id))}
-                        onClick={() => undefined}
+                            id={Number(row.id)}
+                            icon={row.icon}
+                            name={row.name}
+                            description={row.description}
+                            onDelete={() => handleDelete(Number(row.id))}
+                            onClick={() => undefined}
                         />
-                        ))
-                    ) : (
-                        <div className="col-span-full py-10 text-center text-gray-400 italic bg-gray-50/50 rounded-lg border-2 border-dashed border-gray-100">
+                    ))) : (
+                        <div
+                            className="col-span-full py-10 text-center text-gray-400 italic bg-gray-50/50 rounded-lg border-2 border-dashed border-gray-100">
                             No Categories found.
                         </div>
                     )}
@@ -83,34 +84,35 @@ export const CategoryList = () => {
             <Paginations
                 dataSource={categories}
                 onPrevious={() => setPage((prev) => Math.max(prev - 1, 1))}
-                onNext={() => setPage((prev) => prev < (categories.totalPages || 1) ? prev + 1 : prev)} />
+                onNext={() => setPage((prev) => prev < (categories.totalPages || 1) ? prev + 1 : prev)}
+            />
 
-        {showDelete && (
-            <Modal show={true}>
-              <div className="p-4 space-y-6">
-                <PopupHeader onClose={() => setShowDelete(false)}>
-                    <TrashIcon className="w-5 text-red-500" />
-                    Delete Category
-                </PopupHeader>
+            {showDelete && (
+                <Modal show={true}>
+                    <div className="p-4 space-y-6">
+                        <PopupHeader onClose={() => setShowDelete(false)}>
+                            <TrashIcon className="w-5 text-red-500" />
+                            Delete Category
+                        </PopupHeader>
 
-                <div>
-                  <div className="pb-2">
-                    This action will permanently remove "{categories.data.find((item) => item.id === selectedId)?.name || "this Category."}"
-                  </div>
-                  are you sure you want to proceed?
-                </div>
+                        <div>
+                            <div className="pb-2">
+                            This action will permanently remove "{categories.data.find((item) => item.id === selectedId)?.name || "this Category."}"
+                        </div>
+                        are you sure you want to proceed?
+                    </div>
 
-                <div className="flex justify-end space-x-3">
-                  <CancelButton onClick={() => setShowDelete(false)}>
-                    Cancel
-                  </CancelButton>
-                  <DeleteButton onClick={() => deleteRecord(selectedId)}>
-                    Delete
-                  </DeleteButton>
-                </div>
+                    <ModalButtonsContainer>
+                        <CancelButton onClick={() => setShowDelete(false)}>
+                            Cancel
+                        </CancelButton>
+                        <DeleteButton onClick={() => deleteRecord(selectedId)}>
+                            Delete
+                        </DeleteButton>
+                    </ModalButtonsContainer>
               </div>
             </Modal>
-        )}
+            )}
         </>
     )
 }
