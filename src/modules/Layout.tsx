@@ -95,7 +95,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             <div className="space-y-4">
                 {user && !isSellerCentre && <Header />}
                 
-                <div className="px-24">
+                <div className="px-20">
                     {children}
                 </div>
             </div>
