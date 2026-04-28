@@ -72,6 +72,14 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 </div>
                 
                 <div className="flex space-x-2 items-center">
+                    {user? (
+                        <div>
+                            Hello <b>{user.displayName
+                            ? user.displayName.split(' ')[0]
+                            : ''}!</b>
+                        </div>
+                    ) : null}
+
                     <button className="flex space-x-0.5 items-center hover:text-gray-300">
                         <QuestionMarkCircleIcon className="w-4" />
                         <p>Help</p>
@@ -80,12 +88,12 @@ export const Layout: React.FC<Props> = ({ children }) => {
                     {/* Show Log In or Log Out based on auth state */}
                     {user ? (
                         <button onClick={handleLogout}
-                            className="font-semibold px-3 py-1 border-b border-transparent hover:border-white transition duration-300 cursor-pointer"
+                            className="font-semibold px-3 py-1 border-b border-white transition duration-300 cursor-pointer"
                         >
                             Log Out
                         </button>
                     ) : (
-                        <Link to="/login" className="font-semibold px-3 py-1 border-b border-transparent hover:border-white transition duration-300 cursor-pointer">
+                        <Link to="/login" className="font-semibold px-3 py-1 border-b border-white transition duration-300 cursor-pointer">
                             Log In
                         </Link>
                     )}

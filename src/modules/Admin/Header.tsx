@@ -45,7 +45,7 @@ export const Header = () => {
                     </Link>
                     <div className="flex items-center gap-4">
                         <Link onClick={() => handleMenuClick("dashboard")} to={`${routes.DASHBOARD}`} className={`${activeMenuClass("dashboard")}`}>
-                            Home
+                            Dashboard
                         </Link>
                         <Link onClick={() => handleMenuClick("category")} to={`${routes.CATEGORY}`} className={`${activeMenuClass("category")}`}>
                             Category
