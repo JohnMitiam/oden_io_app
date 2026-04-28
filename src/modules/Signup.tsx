@@ -31,6 +31,9 @@ export const Signup: React.FC<Props> = ({ switchMode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  
+  const passwordsMatch = password === confirmPassword && password.length > 0;
 
   const from = location.state?.from?.pathname || routes.HOME;
 
@@ -105,14 +108,23 @@ export const Signup: React.FC<Props> = ({ switchMode }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
+            <InputPassword
+              label="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            {password !== confirmPassword && confirmPassword.length > 0 && (
+              <p className="text-xs text-red-500 italic">Passwords do not match</p>
+            )}
+
             {error && (
               <div className="text-sm text-red-500 italic">{error}</div>
             )}
           </div>
 
           <div className="space-y-2">
-            <SignInButton onClick={() => signUpwithEmail()} disabled={isAuth}>
-              Sign up
+            <SignInButton onClick={() => signUpwithEmail()} disabled={!passwordsMatch || isAuth}>
+              {isAuth ? "Creating Account..." : "Sign up"}
             </SignInButton>
             <div className="w-full flex items-center justify-center relative py-4">
               <div className="w-full h-0.5 bg-black"></div>

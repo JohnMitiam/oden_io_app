@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, useLocation } from "react-router";
 import { Header } from './Admin/Header';
 import { auth } from "../firebase/firebase";
 import { useAuth } from '../contexts/AuthContext'; // Import your auth hook
@@ -14,7 +14,6 @@ interface Props {
 export const Layout: React.FC<Props> = ({ children }) => {
     const { user, loading } = useAuth();
 
-    const navigate = useNavigate();
     const location = useLocation();
 
     if (loading) {
@@ -23,14 +22,16 @@ export const Layout: React.FC<Props> = ({ children }) => {
 
     const isAdminView = location.pathname.startsWith('/dashboard') || 
                         location.pathname.startsWith('/products') || 
-                        location.pathname.startsWith('/category');
+                        location.pathname.startsWith('/category')
+    ;
 
     const isSellerCentre = location.pathname === '/';
 
     const handleLogout = async () => {
         try {
             await signOut(auth);
-            navigate("/", { replace: true });
+            // navigate("/", { replace: true });
+            window.location.href = "/";
         } catch (error) {
             console.error("Error signing out: ", error);
         }

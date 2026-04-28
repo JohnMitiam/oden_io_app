@@ -25,15 +25,13 @@ export const InputText: React.FC<Props> = ({
     <div>
       <div className="text-gray-800 text-sm py-1">{label}</div>
       <input
-        datatype={dataType}
+        type={dataType}
         readOnly={readonly}
-        className="border rounded-md p-2 w-full border-primary-300 focus:border-primary-500 focus:ring-primary-500"
         value={inputValue}
+        className="p-2 w-full bg-white border border-gray-300 rounded-md outline-none transition-all focus:border-primary-400 focus:ring-1 focus:ring-primary-400"
         onChange={(e) => {
           setInputValue(e.target.value);
-          if (onChange) {
-            onChange(e);
-          }
+          if (onChange) onChange(e);
         }}
       />
     </div>

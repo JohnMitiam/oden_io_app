@@ -7,23 +7,23 @@ interface BaseInputProps {
 }
 
 const BaseInput = tw.input<BaseInputProps>
-    `border border-r rounded-l-md rounded--r-none p-2 w-full placeholder:text-sm border-gray-300
+    `p-2 w-full bg-white border border-gray-300 rounded-md outline-none transition-all focus:border-primary-400 focus:ring-1 focus:ring-primary-400
     ${(props) =>
         !props.hasError &&
         !props.value &&
-        'border-primary-300 focus:border-primary-500 focus:ring-primary-500'}
+        'border-primary-300 focus:border-primary-400 focus:ring-1 focus:ring-primary-400'}
     ${(props) =>
         !props.hasError &&
         !!props.value &&
-        'border-primary-300 focus:border-primary-500 focus:ring-primary-500'}
+        'border-primary-300 focus:border-primary-400 focus:ring-1 focus:ring-primary-400'}
     ${(props) =>
         props.hasError &&
         !!props.value &&
-        'border-primary-300 focus:border-primary-500 focus:ring-primary-500'}
+        'border-primary-300 focus:border-primary-400 focus:ring-1 focus:ring-primary-400'}
     ${(props) =>
         props.hasError &&
         !!props.value &&
-        'border-red-300 focus:border-red-500 focus:ring-red-100'}
+        'border-red-300 focus:border-red-400 focus:ring-1 focus:ring-red-400'}
     `;
 
 type Props = {

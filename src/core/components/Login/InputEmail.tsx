@@ -30,9 +30,7 @@ export const InputEmail: React.FC<Props> = ({
             <div className="text-gray-800 text-sm py-1">{label}</div>
             <input
                 datatype={dataType}
-                className={`border rounded-md p-2 w-full ${
-                    isValid ? 'border-gray-300' : 'border-red-500'
-                }`}
+                className="p-2 w-full bg-white border border-gray-300 rounded-md outline-none transition-all focus:border-primary-400 focus:ring-1 focus:ring-primary-400"
                 value={inputValue}
                 onChange={(e) => {
                     setInputValue(e.target.value);

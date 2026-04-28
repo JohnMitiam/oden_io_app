@@ -1,3 +1,4 @@
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -19,19 +20,29 @@ export const InputPassword: React.FC<Props> = ({
         setInputValue(value);
     }, [value])
 
+    const [showPassword, setShowPassword] = useState(false);
+
     return (
-        <div>
+        <div className="w-full">
             <div className="text-gray-800 text-sm py-1">{label}</div>
+            <div className="flex items-center border border-gray-300 rounded-md bg-white focus-within:border-primary-400 focus-within:ring-1 focus-within:ring-primary-400 transition-all">
             <input
-                type={dataType}
-                className="border rounded-md p-2 w-full border-gray-300"
+                type={showPassword ? 'text' : dataType}
+                className="p-2 w-full bg-transparent outline-none"
                 value={inputValue}
                 onChange={(e) => {
                     setInputValue(e.target.value);
                     if (onChange) {
                         onChange(e)
                     }
-                }} />
+                }}
+            />
+            <button className="pr-2" onClick={() => setShowPassword(!showPassword)}>
+                {showPassword
+                ? <EyeSlashIcon className="text-gray-400 hover:text-gray-600 w-4" />
+                : <EyeIcon className="text-gray-400 hover:text-gray-600 w-4" />}
+            </button>
+            </div>
         </div>
     )
 }
