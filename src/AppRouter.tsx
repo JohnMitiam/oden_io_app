@@ -1,54 +1,116 @@
-import { createHashRouter } from "react-router";
+import { createHashRouter, Navigate, Outlet } from "react-router";
 import App from "./App";
 import {
     Category,
     CategoryList
 } from "./modules/Admin/Category";
-import { LandingPage } from "./modules/Admin/LandingPage";
+import { Dashboard } from "./modules/Admin/Dashboard";
 import {
     Product,
     ProductList,
     CreateProduct,
     DetailsProduct
 } from "./modules/Admin/Product";
+import { useAuth } from "./contexts/AuthContext";
+import { AdminRoute } from "./AdminRoute";
+import { Login } from "./modules/Login";
+import { Signup } from "./modules/Signup";
+import { LandingPage } from "./modules/Main/LandingPage";
+
+interface AppRouterProps {
+    children?: React.ReactNode;
+}
+
+const AuthConditional: React.FC<AppRouterProps> = ({ children }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) return <>Loading...</>;
+
+  if (user) {
+    return <Navigate to="/" replace />; 
+  }
+
+  return <>{children}</>;
+};
 
 export const AppRouter = createHashRouter([
     {
         path: "/",
         element: <App />,
         children: [
+            // Guest Routes
             {
                 index: true,
                 element: <LandingPage />
             },
             {
-                path: "category",
-                element: <Category />,
-                children: [
-                    {
-                        index: true,
-                        element: <CategoryList />
-                    }
-                ]
-            },
+                        path: "category",
+                        element: <Category />,
+                        children: [
+                            {
+                                index: true,
+                                element: <CategoryList />
+                            }
+                        ]
+                    },
             {
-                path: "products",
-                element: <Product />,
+                path: "login",
+                element:
+                <AuthConditional>
+                    <Login switchMode={() => window.location.hash = "#/signup"} />
+                </AuthConditional>
+            },{
+                path: "signup",
+                element:
+                <AuthConditional>
+                    <Signup switchMode={() => window.location.hash = "#/login"} />
+                </AuthConditional>
+            },
+
+            // Admin Routes
+            {
+                // path: "admin",
+                element: (
+                    <AdminRoute>
+                        <Outlet />
+                    </AdminRoute>
+                ),
                 children: [
                     {
-                    index: true,
-                    element: <ProductList />
+                        path: "dashboard",
+                        element: <Dashboard />
                     },
                     {
-                        path: "create",
-                        element: <CreateProduct />
+                        path: "category",
+                        element: <Category />,
+                        children: [
+                            {
+                                index: true,
+                                element: <CategoryList />
+                            }
+                        ]
                     },
                     {
-                        path: ":id",
-                        element: <DetailsProduct />
+                        path: "products",
+                        element: <Product />,
+                        children: [
+                            {
+                                index: true,
+                                element: <ProductList />
+                            },
+                            {
+                                path: "create",
+                                element: <CreateProduct />
+                            },
+                            {
+                                path: ":id",
+                                element: <DetailsProduct />
+                            }
+                        ]
                     }
                 ]
             }
         ]
     }
+    
 ])

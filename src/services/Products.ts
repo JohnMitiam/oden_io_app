@@ -10,6 +10,18 @@ export const ProductServices = {
 
         return axios.post(createUrl, category)
     },
+    getMyProducts: async function (page: number = 1, pageSize: number = 10) {
+        let dataUrl = getDataUrl(
+            api.BASE_URL,
+            `${api.PRODUCT_ENPOINT}/my-products`,
+            page,
+            pageSize
+        );
+
+        return axios.get(dataUrl).then((response) => {
+            return response.data as Promise<ProductTableResultViewModel>;
+        });
+    },
     delete: async function (id: number) {
         const deleteUrl = `${api.BASE_URL}${api.PRODUCT_ENPOINT}/${id}`;
 

@@ -12,9 +12,12 @@ export const Header = () => {
     const setActiveMenuRoute = (route: any) => {
         if (route === routes.HOME) {
             setActiveMenu("home");
+        } else if (route === routes.DASHBOARD) {
+            setActiveMenu("dashboard")
         } else if (route === routes.CATEGORY) {
             setActiveMenu("category")
-        } else {
+        } else if (route === routes.PRODUCTS) {
+            setActiveMenu("products")
         }
     }
 
@@ -41,7 +44,7 @@ export const Header = () => {
                         <OdenLogo height="" width="100%" />
                     </Link>
                     <div className="flex items-center gap-4">
-                        <Link onClick={() => handleMenuClick("home")} to={`${routes.HOME}`} className={`${activeMenuClass("home")}`}>
+                        <Link onClick={() => handleMenuClick("dashboard")} to={`${routes.DASHBOARD}`} className={`${activeMenuClass("dashboard")}`}>
                             Home
                         </Link>
                         <Link onClick={() => handleMenuClick("category")} to={`${routes.CATEGORY}`} className={`${activeMenuClass("category")}`}>

@@ -6,3 +6,4 @@ export {AdditionalFormikInput} from './AdditionalFormikInput';
 export {FormikTextArea} from './FormikTextArea'
 export {FormsButtonContainer} from './FormsButtonContainer'
 export {FormikRichTextArea} from './FormikRichTextArea'
+export {InputText} from './InputText'

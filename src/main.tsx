@@ -1,11 +1,17 @@
-import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom/client'
 import './index.css'
 import React from 'react'
 import { RouterProvider } from 'react-router'
 import { AppRouter } from './AppRouter'
+import { AuthProvider } from './contexts/AuthContext'
 
-createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-        <RouterProvider router={AppRouter} />
+const root = ReactDOM.createRoot(
+    document.getElementById('root') as HTMLElement
+);
+root.render(
+    <React.StrictMode>
+        <AuthProvider>
+            <RouterProvider router={AppRouter} />
+        </AuthProvider>
     </React.StrictMode>
 )
