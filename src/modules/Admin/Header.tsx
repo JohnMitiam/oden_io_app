@@ -4,6 +4,12 @@ import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { routes } from "../../config/routes";
 import { OdenLogo } from "../../core/OdenLogo";
 
+const pages = [
+    { key: "dashboard", title: "Dashboard", to: routes.DASHBOARD },
+    { key: "category", title: "Category", to: routes.CATEGORY },
+    { key: "products", title: "Products", to: routes.PRODUCTS },
+]
+
 export const Header = () => {
     const [activeMenu, setActiveMenu] = useState(localStorage.getItem("activeMenu") || null);
 
@@ -44,15 +50,11 @@ export const Header = () => {
                         <OdenLogo height="" width="100%" />
                     </Link>
                     <div className="flex items-center gap-4">
-                        <Link onClick={() => handleMenuClick("dashboard")} to={`${routes.DASHBOARD}`} className={`${activeMenuClass("dashboard")}`}>
-                            Dashboard
-                        </Link>
-                        <Link onClick={() => handleMenuClick("category")} to={`${routes.CATEGORY}`} className={`${activeMenuClass("category")}`}>
-                            Category
-                        </Link>
-                        <Link onClick={() => handleMenuClick("products")} to={`${routes.PRODUCTS}`} className={`${activeMenuClass("products")}`}>
-                            Products
-                        </Link>
+                        {pages.map((page) => (
+                            <Link to={page.to} onClick={() => handleMenuClick(page.key)} className={`${activeMenuClass(page.key)}`}>
+                                {page.title}
+                            </Link>
+                        ))}
                         <button className="cursor-pointer">
                             <ShoppingCartIcon className="text-white w-5 hover:text-primary-500" />
                         </button>

@@ -1,5 +1,9 @@
+import { DashboardList } from "./DashboardList"
+
 export const Dashboard = () => {
     return (
-        <div>This is the Dashboard</div>
+        <div className="py-6">
+            <DashboardList />
+        </div>
     )
 }
