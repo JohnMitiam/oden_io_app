@@ -77,15 +77,15 @@ export const Signup: React.FC<Props> = ({ switchMode }) => {
   };
 
   return (
-    <div className="grid grid-cols-12 py-8 px-6 h-screen items-center">
+    <div className="grid grid-cols-12 px-20 h-[96vh] items-center">
     <div className="col-span-9"></div>
       <div className="shadow-md border rounded-2xl border-gray-300 px-6 w-full py-12 space-y-8 bg-white col-span-3">
         <div className="">
-                  <div className="flex justify-center border-b border-gray-300">
-                    <OdenLogo />
-                  </div>
-                  <p className="text-base text-gray-600">Welcome !</p>
-                </div>
+            <div className="flex justify-center border-b border-gray-300">
+              <OdenLogo />
+            </div>
+            <p className="text-base text-gray-600">Welcome !</p>
+        </div>
         <div className="space-y-6">
           <div className="space-y-4">
             <InputText

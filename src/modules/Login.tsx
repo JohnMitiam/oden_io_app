@@ -65,8 +65,8 @@ export const Login: React.FC<Props> = ({ switchMode }) => {
   };
 
   return (
-    <div className="grid grid-cols-12 h-screen items-center">
-    <div className="col-span-9"></div>
+    <div className="grid grid-cols-12 px-20 h-screen items-center">
+      <div className="col-span-9"></div>
       <div className="shadow-md border rounded-2xl border-gray-300 px-6 w-full py-12 space-y-8 bg-white col-span-3">
         <div className="">
           <div className="flex justify-center border-b border-gray-300">

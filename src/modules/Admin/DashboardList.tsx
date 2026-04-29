@@ -24,12 +24,12 @@ const DataCounters = [
   {
     value: 10,
     title: 'Products',
-    description: 'Quotations for clients.',
+    description: 'Available for Sale.',
   },
   {
     value: 10,
     title: 'Categories',
-    description: 'Billed to clients.',
+    description: 'Active Categories.',
   },
   {
     value: 15,

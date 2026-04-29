@@ -27,6 +27,8 @@ export const Layout: React.FC<Props> = ({ children }) => {
 
     const isSellerCentre = location.pathname === '/';
 
+    const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
+
     const handleLogout = async () => {
         try {
             await signOut(auth);
@@ -40,7 +42,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
     return (
         <>
             {/* Top Bar - Always visible or customized */}
-            <div className="px-24 py-1 bg-primary-400 flex justify-between items-center gap-4 text-xs text-white">
+            <div className={`${isAuthPage
+                ? "fixed"
+                : ""} w-full px-24 py-1 bg-primary-400 flex justify-between items-center gap-4 text-xs text-white`}>
                 <div className="space-x-3 flex items-center">
                     <Link to="/">
                         {user ? (
@@ -54,7 +58,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
                             </Link>
                         )
                     ) : (
-                        <Link to="/login" state={{ from: "/dashboard" }} className="hover:underline">
+                        <Link to={isAuthPage ? "/" : "/login"}
+                            state={{ from: "/dashboard" }}
+                            className="hover:underline">
                             Visit Storefront
                         </Link>
                     )}
@@ -103,7 +109,18 @@ export const Layout: React.FC<Props> = ({ children }) => {
             <div className="space-y-4">
                 {user && !isSellerCentre && <Header />}
                 
-                <div className="px-20">
+                <div className={isAuthPage
+                    ? "px-0 items-center"
+                    : "px-20"}
+                    style={isAuthPage
+                        ? { backgroundColor: '#f3f4f6',
+                            backgroundImage: `linear-gradient(rgba(243, 244, 246, 0.85), rgba(243, 244, 246, 0.85)), 
+                              url('https://images.pexels.com/photos/9789216/pexels-photo-9789216.jpeg?_gl=1*152m5y3*_ga*MTMwNjI1MTA2My4xNzc3NDY4Mjkx*_ga_8JE65Q40S6*czE3Nzc0NjgyOTAkbzEkZzEkdDE3Nzc0Njg2OTEkajI2JGwwJGgw')
+                              `,
+                            backgroundSize: 'cover', 
+                            backgroundRepeat: 'no-repeat', }
+                        : {}}
+                    >
                     {children}
                 </div>
             </div>
