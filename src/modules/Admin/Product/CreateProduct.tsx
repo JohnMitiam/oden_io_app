@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { useNavigate } from "react-router";
-import { PlusIcon, PhotoIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, PhotoIcon, RectangleStackIcon } from "@heroicons/react/24/outline";
 
 import { routes } from "../../../config/routes";
 import { 
@@ -16,10 +16,16 @@ import { productDefaultValue, productValidationSchema } from "../../../models/Pr
 import { ProductServices } from "../../../services/Products";
 import { CategoryServices } from "../../../services/Category";
 import type { CategoryViewModel } from "../../../models/Category";
+import { Modal, PopupHeader } from "../../../core/components/Box";
+import { CreateCategory } from "../Category/CreateCategory";
 
 export const CreateProduct = () => {
   const [cat, setCat] = useState<CategoryViewModel[]>([]);
   const navigate = useNavigate();
+  const [showCreateCategory, setShowCreateCategory] = useState(false);
+const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  const handleRefresh = () => setRefreshTrigger((prev) => prev + 1);
 
   const loadCategories = async () => {
     try {
@@ -32,7 +38,7 @@ export const CreateProduct = () => {
 
   useEffect(() => {
     loadCategories();
-  }, []);
+  }, [refreshTrigger]);
 
   return (
     <Formik
@@ -80,14 +86,14 @@ export const CreateProduct = () => {
 
               <div className="flex flex-col space-y-2">
                 <span className="font-semibold text-sm">Select Categories</span>
-                <ul className="overflow-y-auto max-h-60 border border-gray-400 rounded-md bg-white">
+                <ul className="overflow-y-auto max-h-60 border border-gray-400 rounded-md bg-white py-2 px-4 space-y-3">
                   {cat.map((row) => {
                     const isChecked = formikProps.values.productCategories.some(
                       (pc) => pc.categoryId === row.id
                     );
 
                     return (
-                      <li key={row.id} className="border-b last:border-0 hover:bg-gray-50">
+                      <li key={row.id} className="last:border-0 hover:bg-gray-50">
                         <label className="flex items-center p-2 cursor-pointer space-x-3">
                           <input
                             type="checkbox"
@@ -123,13 +129,28 @@ export const CreateProduct = () => {
               </div>
 
               <button
-                type="button"
+                onClick={() => setShowCreateCategory(true)}
                 className="flex items-center gap-2 py-2 px-3 border border-gray-800 hover:bg-gray-50 rounded-md w-full justify-center transition-colors"
               >
                 <PlusIcon className="w-5" />
                 <span className="text-sm">Add New Category</span>
               </button>
             </div>
+
+            {showCreateCategory && (
+                <Modal show={true}>
+                    <div className="p-4">
+                        <PopupHeader onClose={() => setShowCreateCategory(false)}>
+                            <RectangleStackIcon className="w-5 text-gray-500" />
+                            Create Category
+                        </PopupHeader>
+                        <CreateCategory loadData={async () => {
+                            handleRefresh();
+                        }}
+                        onClose={() => setShowCreateCategory(false)} />
+                    </div>
+                </Modal>
+            )}
           </div>
 
           <FormsButtonContainer>
