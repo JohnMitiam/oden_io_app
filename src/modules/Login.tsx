@@ -24,11 +24,6 @@ export const Login: React.FC<Props> = ({ switchMode }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const isEmailValid = email.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const isPasswordValid = password.length >= 6;
-
-  const isButtonDisabled = isAuth || !isEmailValid || !isPasswordValid;
-
   const from = location.state?.from?.pathname || routes.HOME;
 
   const continueWithGoogle = async () => {
@@ -65,14 +60,18 @@ export const Login: React.FC<Props> = ({ switchMode }) => {
   };
 
   return (
-    <div className="grid grid-cols-12 px-20 h-screen items-center">
-      <div className="col-span-9"></div>
-      <div className="shadow-md border rounded-2xl border-gray-300 px-6 w-full py-12 space-y-8 bg-white col-span-3">
+    <div className="grid grid-cols-12 px-20 h-screen items-center pt-6">
+      <div className="col-span-9 px-8">
+        <p className="text-white text-3xl text-start font-black tracking-widest">
+        Welcome Back.<br/>
+        Experience the Difference.
+        </p>
+      </div>
+      <div className="shadow-md border rounded-2xl border-gray-300 p-8 w-full space-y-5 bg-gray-100 col-span-3">
         <div className="">
           <div className="flex justify-center border-b border-gray-300">
             <OdenLogo />
           </div>
-          <p className="text-base text-gray-600">Welcome Back !</p>
         </div>
         <div className="space-y-6">
           <div className="space-y-4">
@@ -95,12 +94,12 @@ export const Login: React.FC<Props> = ({ switchMode }) => {
           </div>
 
           <div className="space-y-2">
-            <SignInButton onClick={() => signInWithEmail()} disabled={isButtonDisabled}>
-              Login
+            <SignInButton onClick={() => signInWithEmail()} >
+              {isAuth ? "Loading..." : "Login"}
             </SignInButton>
             <div className="w-full flex items-center justify-center relative py-4">
               <div className="w-full h-0.5 bg-black"></div>
-              <p className="text-lg absolute text-black px-2 bg-white">OR</p>
+              <p className="text-lg absolute text-black px-2 bg-gray-100">OR</p>
             </div>
             <LoginWithGoogle
               onClick={() => continueWithGoogle()}
@@ -111,11 +110,11 @@ export const Login: React.FC<Props> = ({ switchMode }) => {
           </div>
 
           <div className="w-full flex items-center justify-center">
-            <p className="text-sm font-normal text-gray-400">
+            <p className="text-sm font-normal text-gray-600">
               Don't have an account?{" "}
               <button
                 onClick={switchMode}
-                className="font-semibold italic text-primary-400 hover:underline"
+                className="font-semibold italic text-primary-500 hover:underline"
               >
                 Sign up now!
               </button>

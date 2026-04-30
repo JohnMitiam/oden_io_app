@@ -7,8 +7,19 @@ export interface ProductViewModel {
   name: string;
   description: string;
   price: string;
-  imageData: string;
+  productCategoryId: number
+  productCategories: ProductCategoriesViewModel[];
+  // imageData: string;
   isActive: boolean;
+}
+
+export interface ProductCategoriesViewModel {
+  id: number;
+  productId: number;
+  categoryId: number;
+  categories: [];
+  name: string;
+  isDeleted: boolean;
 }
 
 export interface ProductTableResultViewModel
@@ -29,7 +40,9 @@ export const productDefaultValue: ProductViewModel = {
   name: "",
   description: "",
   price: "",
-  imageData: "",
+  productCategoryId: 0,
+  productCategories: [],
+  // imageData: "",
   isActive: true,
 };
 

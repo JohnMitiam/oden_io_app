@@ -113,13 +113,14 @@ export const Layout: React.FC<Props> = ({ children }) => {
                     ? "px-0 items-center"
                     : "px-20"}
                     style={isAuthPage
-                        ? { backgroundColor: '#f3f4f6',
-                            backgroundImage: `linear-gradient(rgba(243, 244, 246, 0.85), rgba(243, 244, 246, 0.85)), 
+                        ? { 
+                            backgroundColor: '#f3f4f6',
+                            backgroundImage: `linear-gradient(rgba(243, 244, 246, 0.05), rgba(243, 244, 246, 0.05)), 
                               url('https://images.pexels.com/photos/9789216/pexels-photo-9789216.jpeg?_gl=1*152m5y3*_ga*MTMwNjI1MTA2My4xNzc3NDY4Mjkx*_ga_8JE65Q40S6*czE3Nzc0NjgyOTAkbzEkZzEkdDE3Nzc0Njg2OTEkajI2JGwwJGgw')
                               `,
                             backgroundSize: 'cover', 
-                            backgroundRepeat: 'no-repeat', }
-                        : {}}
+                            backgroundRepeat: 'no-repeat',
+                        } : {}}
                     >
                     {children}
                 </div>

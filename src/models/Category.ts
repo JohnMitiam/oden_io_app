@@ -26,7 +26,7 @@ export const categoryDefaultValue: CategoryViewModel = {
   id: 0,
   name: "",
   description: "",
-  icon: "",
+  icon: ""
 };
 
 export const categoryTableDefaultValue: CategoryTableResultViewModel = {
