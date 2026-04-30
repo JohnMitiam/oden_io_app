@@ -9,7 +9,7 @@ export interface ProductViewModel {
   price: string;
   productCategoryId: number
   productCategories: ProductCategoriesViewModel[];
-  // imageData: string;
+  imageData: string;
   isActive: boolean;
 }
 
@@ -42,7 +42,7 @@ export const productDefaultValue: ProductViewModel = {
   price: "",
   productCategoryId: 0,
   productCategories: [],
-  // imageData: "",
+  imageData: "",
   isActive: true,
 };
 

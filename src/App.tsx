@@ -1,24 +1,22 @@
-import './App.css'
-import { Outlet } from 'react-router'
-import { Layout } from './modules/Layout'
+import './App.css';
+import { Outlet } from 'react-router';
+import { Layout } from './modules/Layout';
 import { useAuth } from './contexts/AuthContext';
 import axios from 'axios';
-import { useEffect } from 'react';
 
 const App: React.FC = () => {
-  const { user } = useAuth();
+  const auth = useAuth();
 
-  useEffect(() => {
-      const interceptor = axios.interceptors.request.use(async (config) => {
-      if (user) {
-        const idToken = await user.getIdToken(true);
-        config.headers.Authorization = `Bearer ${idToken}`;
-      }
-        return config;
-      });
-  return () => axios.interceptors.request.eject(interceptor);
-}, [user]);
+  axios.interceptors.request.use(async (config) => {
+    if (auth.user) {
+      const idToken = await auth.user.getIdToken(true);
+      config.headers = config.headers ?? {};
+      config.headers.Authorization = `Bearer ${idToken}`;
+      config.headers["X-User-Role"] = "Admin";
+    }
 
+    return config;
+  });
 
   return (
     <Layout>
@@ -27,4 +25,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App
+export default App;
