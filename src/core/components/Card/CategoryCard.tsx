@@ -1,4 +1,4 @@
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { QuestionMarkCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 interface Props {
     id: number;
@@ -37,9 +37,22 @@ export const CategoryCard: React.FC<Props> = ({
                     <TrashIcon className="w-4" />
                 </button>
             </div>
-            <div className="flex justify-center">
-                <div className="[&_svg]:stroke-[1.5] [&_svg]:size-8 [&_svg]:stroke-black [&_svg]:transition-transform hover:[&_svg]:scale-110 flex justify-center rounded-full border p-4" dangerouslySetInnerHTML={{ __html: icon }} />
-            </div>
+            {icon && icon.length > 0 ? (
+  <div className="flex justify-center">
+    <div 
+      className="[&_svg]:stroke-[1.5] [&_svg]:size-8 [&_svg]:stroke-black [&_svg]:transition-transform hover:[&_svg]:scale-110 flex justify-center rounded-full border p-4" 
+      dangerouslySetInnerHTML={{ __html: icon }} 
+    />
+  </div>
+) : (
+  <div className="flex justify-center">
+    {/* This wrapper uses the exact same classes as the div above */}
+    <div className="[&_svg]:stroke-[1.5] [&_svg]:size-8 [&_svg]:stroke-black [&_svg]:transition-transform hover:[&_svg]:scale-110 flex justify-center rounded-full border p-4">
+      <QuestionMarkCircleIcon />
+    </div>
+  </div>
+)}
+            
             <div className="">
                 <div className="font-semibold text-base text-center">{name}</div>
                 <div className="font-base text-sm italic text-center">{description}</div>

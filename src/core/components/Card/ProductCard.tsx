@@ -1,10 +1,11 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { OdenLogo } from "../../OdenLogo";
+import type { ProductImageViewModel } from "../../../models/Product";
 
 interface Props {
     name: string;
     price: number;
-    imageData?: string;
+    productImages?: ProductImageViewModel[];
     onClick: () => void;
     onDelete: () => void;
 }
@@ -12,7 +13,7 @@ interface Props {
 export const ProductCard: React.FC<Props> = ({
     name,
     price,
-    imageData,
+    productImages,
     onClick,
     onDelete
 }) => {
@@ -22,30 +23,38 @@ export const ProductCard: React.FC<Props> = ({
         maximumFractionDigits: 2,
     }).format(price);
 
+   const primaryImage = productImages?.find((img) => img.isPrimary) || productImages?.[0];
+
+    const imgSrc = primaryImage 
+        ? `data:${primaryImage.mimeType};base64,${primaryImage.imageData}` 
+        : null;
+
     return (
         <div className="transition-all duration-300 ease-in-out transform hover:-translate-y-1">
-            <div className="border-t border-x border-gray-300 rounded-t-xl py-4 space-y-3">
-            <div className="mx-3 overflow-hidden rounded-lg bg-gray-50">
-                <div className="flex justify-center p-2 h-48">
-                    {imageData ? (
-                        <img 
-                        src={imageData} 
-                        alt={name} 
-                        className="object-contain h-full w-full transition-transform duration-300 group-hover:scale-105" />
-          ) : (
-            <span className="text-gray-400 text-sm italic grid items-center">
-                <OdenLogo width="100%" height="" />
-            </span>
-          )}
+            <div className="border-t border-x border-gray-300 rounded-t-xl py-4 space-y-3 px-2 pb-6 pt-3 h-full">
+                <div className="flex justify-center">
+                    {imgSrc ? (
+                            <img 
+                                src={imgSrc} 
+                                alt={name} 
+                                className="object-contain h-full w-full transition-transform duration-300 group-hover:scale-105 rounded-lg" 
+                            />
+                        ) : (
+                            <div className="w-full h-full opacity-20 grayscale flex items-center justify-center p-8">
+                                <OdenLogo width="100%" height="auto" />
+                            </div>
+                        )}
                 </div>
-            </div>
-            <div className="text-start space-y-2 px-3">
-                <div className="font-bold text-primary-500 text-base">${formattedPrice}</div>
-                <div>
-                    <div className="font-semibold text-black text-sm whitespace-pre-wrap">{name}</div>
-                    {/* <div className="font-base text-xs italic">{description}</div> */}
+                <div className="text-start space-y-2 px-3">
+                    <div className="font-bold text-primary-500 text-base">
+                        ${formattedPrice}
+                    </div>
+                    <div>
+                        <div className="font-semibold text-black text-sm whitespace-pre-wrap h-10">  
+                            {name}
+                        </div>
+                    </div>
                 </div>
-            </div>
             </div>
 
             <div className="flex">

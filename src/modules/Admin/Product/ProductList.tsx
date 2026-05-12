@@ -58,7 +58,7 @@ export const ProductList = () => {
                         <ProductCard
                             key={row.id || index}
                             price={Number(row.price)}
-                            imageData={row.imageData}
+                            productImages={row.productImages}
                             name={row.name}
                             onClick={() => alert(`Product Id Click! ${row.id}`)}
                             onDelete={() => {

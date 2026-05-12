@@ -48,7 +48,7 @@ export const LandingPage = () => {
           {data.data.length > 0 ? (
             data.data.map((row, index) => (
               <ProductCard
-                imageData={row.imageData}
+                productImages={row.productImages}
                 key={row.id || index}
                 name={row.name}
                 price={Number(row.price)}

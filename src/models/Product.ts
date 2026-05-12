@@ -7,9 +7,8 @@ export interface ProductViewModel {
   name: string;
   description: string;
   price: string;
-  productCategoryId: number
   productCategories: ProductCategoriesViewModel[];
-  imageData: string;
+  productImages: ProductImageViewModel[];
   isActive: boolean;
 }
 
@@ -20,6 +19,15 @@ export interface ProductCategoriesViewModel {
   categories: [];
   name: string;
   isDeleted: boolean;
+}
+
+export interface ProductImageViewModel {
+  id: number;
+  productId: number;
+  imageData: string;
+  mimeType?: string;
+  isPrimary: boolean;
+  isDeleted?: boolean;
 }
 
 export interface ProductTableResultViewModel
@@ -40,9 +48,8 @@ export const productDefaultValue: ProductViewModel = {
   name: "",
   description: "",
   price: "",
-  productCategoryId: 0,
   productCategories: [],
-  imageData: "",
+  productImages: [],
   isActive: true,
 };
 
@@ -58,11 +65,8 @@ export const productTableDefaultValue: ProductTableResultViewModel = {
 
 export const productValidationSchema = Yup.object({
   name: Yup.string()
-    .required("Product name is required")
+    // .required("Product name is required")
     .min(2, "Product name must be at least 2 characters")
     .trim("Product name should not have leading or trailing spaces"),
-
   description: Yup.string()
-    .nullable()
-    .transform((value) => (value === "" ? null : value)), // Convert empty string to null
 });
