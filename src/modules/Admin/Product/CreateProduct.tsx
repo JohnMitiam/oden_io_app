@@ -46,8 +46,18 @@ const [refreshTrigger, setRefreshTrigger] = useState(0);
       validationSchema={productValidationSchema}
       validateOnBlur={true}
       onSubmit={async (value, actions) => {
+        const payload = {
+          ...value,
+          Categories: value.productCategories.map((pc) => ({
+            categoryId: pc.categoryId,
+            categoryName: 
+              cat.find((c) => c.id === pc.categoryId)
+              ?.name || "",
+          }))
+        };
+
         try {
-          const result = await ProductServices.create(value);
+          const result = await ProductServices.create(payload);
           if (result.status === 201) {
             navigate(`${routes.PRODUCTS}`);
           }
@@ -86,7 +96,7 @@ const [refreshTrigger, setRefreshTrigger] = useState(0);
 
               <div className="flex flex-col space-y-2">
                 <span className="font-semibold text-sm">Select Categories</span>
-                <ul className="overflow-y-auto max-h-60 border border-gray-400 rounded-md bg-white py-2 px-4 space-y-3">
+                <ul className="overflow-y-auto max-h-58 custom-scrollbar border border-gray-400 rounded-md bg-white px-4 py-2 space-y-2">
                   {cat.map((row) => {
                     const isChecked = formikProps.values.productCategories.some(
                       (pc) => pc.categoryId === row.id
@@ -129,6 +139,7 @@ const [refreshTrigger, setRefreshTrigger] = useState(0);
               </div>
 
               <button
+                type="button"
                 onClick={() => setShowCreateCategory(true)}
                 className="flex items-center gap-2 py-2 px-3 border border-gray-800 hover:bg-gray-50 rounded-md w-full justify-center transition-colors"
               >

@@ -60,11 +60,6 @@ export const productValidationSchema = Yup.object({
   name: Yup.string()
     .required("Product name is required")
     .min(2, "Product name must be at least 2 characters")
-    .max(50, "Product name cannot exceed 50 characters")
-    .matches(
-      /^[a-zA-Z0-9\s\-_]+$/,
-      "Category name can only contain letters, numbers, spaces, hyphens, and underscores",
-    )
     .trim("Product name should not have leading or trailing spaces"),
 
   description: Yup.string()
